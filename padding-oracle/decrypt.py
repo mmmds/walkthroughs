@@ -51,11 +51,11 @@ for b in range(0, len(buckets)-1):
 
                 #convert for sending
                 new_cookie = []
-                for cookie in cookie:
-                    new_cookie.append(chr(int(cookie, 16)))
+                for c in cookie:
+                    new_cookie.append(chr(int(c, 16)))
                 new_cookie = urllib.quote_plus(base64.b64encode("".join(new_cookie)))
 
-                r = requests.get(url, cookie={"auth": new_cookie})
+                r = requests.get(url, cookies={"auth": new_cookie})
 
                 if "Invalid padding" not in r.text:
                     intermediate = value ^ byte #I15 = VALUE xor 0x01 etc.
